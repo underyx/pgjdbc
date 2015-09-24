@@ -196,14 +196,10 @@ public class ConnectionFactoryImpl extends ConnectionFactory {
         if (Utils.parseServerVersionStr(assumeMinServerVersion)
             >= ServerVersion.v9_0.getVersionNum()) {
           // User is explicitly telling us this is a 9.0+ server so set properties here:
-          paramList.add(new String[]{"extra_float_digits", "3"});
           String appName = PGProperty.APPLICATION_NAME.get(info);
           if (appName != null) {
             paramList.add(new String[]{"application_name", appName});
           }
-        } else {
-          // User has not explicitly told us that this is a 9.0+ server so stick to old default:
-          paramList.add(new String[]{"extra_float_digits", "2"});
         }
 
         String currentSchema = PGProperty.CURRENT_SCHEMA.get(info);
